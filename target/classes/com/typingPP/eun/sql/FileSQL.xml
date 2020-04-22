@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="fSQL">
+
+	<!-- 프로필 있는지 확인 유무 -->
+	 <select id="profCk" parameterType="fVO" resultType="int">
+ 		SELECT
+			count(*)
+		FROM
+			tp_profile
+		WHERE
+			p_id = (SELECT
+            			m_id
+ 					FROM
+ 						tp_member
+ 					WHERE
+ 						m_id = #{mid}
+ 					)
+ 	</select>
+ 	
+ 	<!-- 프로필업데이트 -->
+	<update id="profUp" parameterType="fVO">
+		UPDATE
+			tp_profile
+		SET
+			p_oriname = #{oriName},
+			p_savename = #{saveName}
+		WHERE
+			p_id = (SELECT
+						m_id
+					FROM
+						tp_member
+					WHERE
+						m_id = #{mid}
+					)
+	</update>
+	
+	<!-- 프로필 입력하기 -->
+	<select id="profIn" parameterType="fVO">
+		INSERT INTO
+			tp_profile
+		VALUES(
+			#{mid},#{oriName},#{saveName},#{len}, #{dir}
+		)
+	</select>
+	
+	<!-- 회원정보 사진 가져오기 -->
+	<select id="getProf" parameterType="fVO" resultType="string">
+		SELECT
+			NVL(p_savename, 'man.jpg')
+		FROM
+			tp_profile, tp_member
+		WHERE
+			m_id = p_id
+		AND
+			m_id = #{mid}
+	</select>
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="gSQL">
+	<update id="sUPDATE" parameterType="mVO">
+		UPDATE
+			tp_member
+		SET
+			m_score = #{score}
+		WHERE
+			m_id = #{id}
+	</update>
+	
+	<select id="rankingSql" resultType="mVO">
+		SELECT
+    		m_id id, m_score score
+		FROM
+    		tp_member
+		WHERE
+    		m_score >0
+		ORDER BY 
+    		m_score desc
+	</select>
+</mapper>

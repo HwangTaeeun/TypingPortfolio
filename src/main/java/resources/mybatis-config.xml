@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+			"http://mybatis.org/dtd/mybatis-3-config.dtd">
+			
+<configuration>
+
+	<settings> 
+		<setting name="cacheEnabled" value="false"/>
+		<setting name="useGeneratedKeys" value="true"/>
+		<setting name="defaultExecutorType" value="REUSE"/>
+	</settings>
+	
+	<typeAliases>
+		<typeAlias alias="mVO" type="com.typingPP.eun.vo.MemberVO" />
+		<typeAlias alias="fVO" type="com.typingPP.eun.vo.FileVO" />
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="com/typingPP/eun/sql/MemberSQL.xml" />
+		<mapper resource="com/typingPP/eun/sql/GameSQL.xml" />
+		<mapper resource="com/typingPP/eun/sql/FileSQL.xml" />
+	</mappers>
+	
+</configuration>
